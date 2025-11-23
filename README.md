@@ -1,12 +1,28 @@
-# React + Vite
+# 短链接服务（Vue + Spring Boot）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+本项目提供一个简单的短链接服务：前端使用 Vite + Vue 3 编写，后端使用 Spring Boot 提供短码生成与跳转能力，存储默认使用内存 H2 数据库。
 
-Currently, two official plugins are available:
+## 运行前端
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+可以通过环境变量 `VITE_API_BASE` 指定后端地址（默认 `http://localhost:8080`）。
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 运行后端
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+
+- REST 接口：`/api/links`（创建、查询短链接）
+- 访问短链接：`/r/{code}` 会 302 跳转至目标地址。
+- 默认使用内存 H2 数据库，并开启了 H2 控制台（`/h2-console`）。
+
+## 目录结构
+
+- `src/`：Vue 前端源码
+- `backend/`：Spring Boot 后端源码（Maven 项目）
